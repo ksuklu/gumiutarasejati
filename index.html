@@ -512,7 +512,8 @@
         let currentUser = JSON.parse(localStorage.getItem('ksu_logged_user')) || null;
         let transactions = JSON.parse(localStorage.getItem('ksu_transactions')) || [];
 
-        const coopLocation = { lat: -8.3582, lng: 116.1550 };
+        // Titik awal lokasi koperasi diperbarui sesuai link Google Maps yang diberikan
+        const coopLocation = { lat: -8.35179, lng: 116.16749 };
         let leafletMap = null;
         let userMarker = null;
 
@@ -557,7 +558,7 @@
                 return;
             }
 
-            leafletMap = L.map('map').setView([coopLocation.lat, coopLocation.lng], 12);
+            leafletMap = L.map('map').setView([coopLocation.lat, coopLocation.lng], 13);
             L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
                 attribution: '&copy; OpenStreetMap'
             }).addTo(leafletMap);
@@ -567,7 +568,7 @@
                 .bindPopup("<b>Base Koperasi GUS MART</b><br>Titik Awal Pengantaran")
                 .openPopup();
 
-            userMarker = L.marker([coopLocation.lat - 0.005, coopLocation.lng + 0.005], { draggable: true })
+            userMarker = L.marker([coopLocation.lat - 0.003, coopLocation.lng + 0.003], { draggable: true })
                 .addTo(leafletMap)
                 .bindPopup("<b>Titik Pengantaran Anda</b><br>Geser pin ini ke lokasi persis Anda");
 
@@ -581,7 +582,7 @@
                 updateLocationFields(e.latlng.lat, e.latlng.lng);
             });
 
-            updateLocationFields(coopLocation.lat - 0.005, coopLocation.lng + 0.005);
+            updateLocationFields(coopLocation.lat - 0.003, coopLocation.lng + 0.003);
         }
 
         function updateLocationFields(lat, lng) {
