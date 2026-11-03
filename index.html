@@ -21,7 +21,7 @@
 </head>
 <body class="bg-slate-950 text-slate-100 antialiased selection:bg-emerald-500 selection:text-slate-950">
 
-    <!-- 1. NAVBAR HEADER UTAMA DENGAN 4 TAB -->
+    <!-- 1. NAVBAR HEADER UTAMA DENGAN 3 TAB UTAMA -->
     <header class="fixed top-0 left-0 right-0 z-50 bg-slate-950/95 backdrop-blur-md border-b border-slate-800/80">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between">
             <a href="#tentang" onclick="switchTab('tentang')" class="flex items-center gap-3">
@@ -32,14 +32,14 @@
                 </div>
             </a>
 
-            <!-- Menu Desktop 4 Tab Utama -->
+            <!-- Menu Navigasi Tengah (Hanya 3 Tab Utama) -->
             <nav class="hidden md:flex items-center gap-2 text-sm font-medium">
                 <button onclick="switchTab('tentang')" id="nav-tentang" class="tab-btn px-4 py-2 rounded-xl text-emerald-400 font-semibold bg-slate-900 border border-slate-800 transition">Tentang Kami</button>
                 <button onclick="switchTab('gus-mart')" id="nav-gus-mart" class="tab-btn px-4 py-2 rounded-xl text-slate-300 hover:text-white hover:bg-slate-900 transition">Gus Mart</button>
                 <button onclick="switchTab('laporan')" id="nav-laporan" class="tab-btn px-4 py-2 rounded-xl text-slate-300 hover:text-white hover:bg-slate-900 transition">Laporan</button>
-                <button onclick="switchTab('login')" id="nav-login" class="tab-btn px-4 py-2 rounded-xl text-slate-300 hover:text-white hover:bg-slate-900 transition">Login Anggota</button>
             </nav>
 
+            <!-- Area Login / Status Anggota di Pojok Kanan Atas -->
             <div class="flex items-center gap-3">
                 <div id="user-status-area"></div>
                 <button id="mobile-menu-btn" type="button" aria-label="Buka Menu" class="md:hidden p-2.5 rounded-xl bg-slate-900 border border-slate-800 text-emerald-400 hover:text-white">
@@ -53,17 +53,14 @@
             <button onclick="switchTab('tentang'); toggleMobileMenu();" class="block w-full text-left px-3 py-2 rounded-lg text-slate-200 hover:bg-slate-800">Tentang Kami</button>
             <button onclick="switchTab('gus-mart'); toggleMobileMenu();" class="block w-full text-left px-3 py-2 rounded-lg text-emerald-400 font-bold">Gus Mart (Sembako)</button>
             <button onclick="switchTab('laporan'); toggleMobileMenu();" class="block w-full text-left px-3 py-2 rounded-lg text-slate-200 hover:bg-slate-800">Laporan Keuangan</button>
-            <button onclick="switchTab('login'); toggleMobileMenu();" class="block w-full text-left px-3 py-2 rounded-lg text-slate-200 hover:bg-slate-800">Login Anggota</button>
         </div>
     </header>
 
     <!-- KONTEN UTAMA DIBAGI MENJADI TAB -->
     <main class="pt-28 pb-20">
 
-        <!-- ================= TAB 1: TENTANG KAMI (PROFIL KOPRASI LENGKAP) ================= -->
+        <!-- ================= TAB 1: TENTANG KAMI (PROFIL KOPERASI LENGKAP) ================= -->
         <section id="tab-tentang" class="tab-content active max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 space-y-16">
-            
-            <!-- Hero Header Tentang Kami -->
             <div class="text-center space-y-4 pt-8">
                 <div class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-emerald-950/80 border border-emerald-800/60 text-emerald-400 text-xs font-semibold">
                     <span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
@@ -96,7 +93,7 @@
                 </div>
             </div>
 
-            <!-- Profil & Komposisi Anggota -->
+            <!-- Profil Pembentukan & Komposisi Anggota -->
             <div class="grid md:grid-cols-2 gap-8">
                 <div class="p-8 rounded-3xl bg-slate-900 border border-slate-800 space-y-4">
                     <h3 class="text-lg font-bold text-amber-400 flex items-center gap-2">
@@ -187,19 +184,19 @@
                 <div class="p-8 rounded-3xl bg-slate-900 border border-slate-800 space-y-4">
                     <h3 class="text-lg font-bold text-amber-400">⚙️ Kegiatan Usaha</h3>
                     <ul class="space-y-3 text-xs sm:text-sm text-slate-300">
-                        <li><strong>a. Usaha Pokok:</strong> ....................................</li>
-                        <li><strong>b. Usaha Pendukung:</strong> ................................</li>
-                        <li><strong>c. Usaha Tambahan:</strong> .................................</li>
+                        <li><strong>a. Usaha Pokok:</strong> Simpan pinjam dan pengadaan kebutuhan pokok rumah tangga melalui platform GUS MART.</li>
+                        <li><strong>b. Usaha Pendukung:</strong> Pemasaran digital produk UMKM lokal KLU dan layanan kurir pengantaran barang.</li>
+                        <li><strong>c. Usaha Tambahan:</strong> Pelatihan peningkatan SDM, pelatihan produk, keuangan, dan digitalisasi usaha.</li>
                     </ul>
                 </div>
 
                 <div class="p-8 rounded-3xl bg-slate-900 border border-slate-800 space-y-4">
                     <h3 class="text-lg font-bold text-teal-400">📈 Perkembangan & Tata Kelola</h3>
                     <ul class="space-y-3 text-xs sm:text-sm text-slate-300">
-                        <li><strong>Kondisi Saat Ini (2026):</strong> ..................................</li>
-                        <li><strong>Mitra Koperasi:</strong> ..........................................</li>
-                        <li><strong>Rapat Anggota:</strong> ...........................................</li>
-                        <li><strong>Modal Awal:</strong> ..............................................</li>
+                        <li><strong>Kondisi Saat Ini (2026):</strong> Koperasi aktif mengembangkan ekonomi digital, memperluas jangkauan pasar produk anggota secara online melalui GUS MART, serta memperkuat sistem layanan antar berbasis peta digital di KLU.</li>
+                        <li><strong>Mitra Koperasi:</strong> Jaringan UMKM lokal, pemasok regional, pemerintah daerah, serta platform teknologi digital pendukung sirkulasi ekonomi kerakyatan.</li>
+                        <li><strong>Rapat Anggota:</strong> Konsisten melaksanakan Rapat Anggota Tahunan (RAT) dan rapat koordinasi berkala guna mengevaluasi kinerja.</li>
+                        <li><strong>Modal Awal:</strong> Bersumber dari simpanan pokok dan simpanan wajib 36 pendiri UMKM KLU, dikelola secara transparan dan akuntabel.</li>
                     </ul>
                 </div>
             </div>
@@ -293,38 +290,6 @@
             </div>
         </section>
 
-        <!-- ================= TAB 4: LOGIN ANGGOTA ================= -->
-        <section id="tab-login" class="tab-content max-w-xl mx-auto px-4 sm:px-6 lg:px-8 py-10">
-            <div class="bg-slate-900 border border-slate-800 p-8 rounded-3xl space-y-6 shadow-2xl">
-                <div class="text-center space-y-2">
-                    <div class="w-12 h-12 rounded-2xl bg-emerald-500/10 text-emerald-400 font-bold flex items-center justify-center mx-auto text-xl">🔑</div>
-                    <h3 class="text-2xl font-bold text-white">Login Verifikasi Anggota</h3>
-                    <p class="text-xs text-slate-400">Masukkan ID & Nama salah satu dari 36 Anggota Resmi Koperasi untuk menikmati harga khusus.</p>
-                </div>
-
-                <div class="p-3 rounded-xl bg-slate-950 text-[11px] text-emerald-400 border border-slate-800 max-h-36 overflow-y-auto">
-                    💡 <strong>Contoh ID Anggota (36 Pendiri KLU):</strong><br>
-                    • GUS-001: Masdiyanto | GUS-002: Siti Aminah<br>
-                    • GUS-003: Wayan Sudarma | GUS-004: Baiq Nurul<br>
-                    • GUS-005: Lalu Sastrawan | ... hingga GUS-036.
-                </div>
-
-                <form id="form-login" class="space-y-4">
-                    <div>
-                        <label class="block text-xs font-semibold text-slate-300 mb-1">Nomor ID Anggota</label>
-                        <input type="text" id="login-id" placeholder="Contoh: GUS-001" required class="w-full px-4 py-3 rounded-xl bg-slate-950 border border-slate-800 text-white text-sm uppercase">
-                    </div>
-                    <div>
-                        <label class="block text-xs font-semibold text-slate-300 mb-1">Nama Lengkap Anggota</label>
-                        <input type="text" id="login-nama" placeholder="Nama sesuai daftar anggota" required class="w-full px-4 py-3 rounded-xl bg-slate-950 border border-slate-800 text-white text-sm">
-                    </div>
-                    <button type="submit" class="w-full py-3.5 rounded-xl bg-emerald-500 text-slate-950 font-extrabold text-sm hover:bg-emerald-400 transition shadow-lg shadow-emerald-900/40">
-                        Verifikasi Masuk Anggota
-                    </button>
-                </form>
-            </div>
-        </section>
-
     </main>
 
     <!-- FOOTER -->
@@ -344,6 +309,39 @@
     <a href="https://wa.me/6281944502860?text=Halo%2C%20saya%20tertarik%20dengan%20KSU%20Gumi%20Utara%20Sejati" target="_blank" class="fixed bottom-6 right-6 z-50 w-14 h-14 bg-emerald-500 hover:bg-emerald-400 text-slate-950 rounded-full flex items-center justify-center shadow-2xl hover:scale-110 transition duration-300">
         <svg class="w-8 h-8 fill-current" viewBox="0 0 24 24"><path d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946.003-6.556 5.338-11.891 11.893-11.891 3.181.001 6.167 1.24 8.413 3.488 2.245 2.248 3.481 5.236 3.48 8.414-.003 6.557-5.338 11.892-11.893 11.892-1.99-.001-3.951-.5-5.688-1.448l-6.305 1.654zm6.597-3.807c1.676.995 3.276 1.591 5.392 1.592 5.448 0 9.886-4.434 9.889-9.885.002-5.462-4.415-9.89-9.881-9.892-5.452 0-9.887 4.434-9.889 9.884-.001 2.225.651 3.891 1.746 5.634l-.999 3.648 3.742-.981z"/></svg>
     </a>
+
+    <!-- MODAL LOGIN ANGGOTA (DIBUKA VIA POPUP / POJOK KANAN ATAS) -->
+    <div id="modal-login" class="fixed inset-0 z-50 bg-slate-950/80 backdrop-blur-md hidden items-center justify-center p-4">
+        <div class="bg-slate-900 border border-slate-800 p-8 rounded-3xl max-w-md w-full space-y-6 shadow-2xl">
+            <div class="text-center space-y-2">
+                <div class="w-12 h-12 rounded-2xl bg-emerald-500/10 text-emerald-400 font-bold flex items-center justify-center mx-auto text-xl">🔑</div>
+                <h3 class="text-2xl font-bold text-white">Login Verifikasi Anggota</h3>
+                <p class="text-xs text-slate-400">Masukkan ID & Nama salah satu dari 36 Anggota Resmi Koperasi.</p>
+            </div>
+
+            <div class="p-3 rounded-xl bg-slate-950 text-[11px] text-emerald-400 border border-slate-800 max-h-36 overflow-y-auto">
+                💡 <strong>Contoh ID Anggota (36 Pendiri KLU):</strong><br>
+                • GUS-001: Masdiyanto | GUS-002: Siti Aminah<br>
+                • GUS-003: Wayan Sudarma | GUS-004: Baiq Nurul<br>
+                • GUS-005: Lalu Sastrawan | ... hingga GUS-036.
+            </div>
+
+            <form id="form-login" class="space-y-4">
+                <div>
+                    <label class="block text-xs font-semibold text-slate-300 mb-1">Nomor ID Anggota</label>
+                    <input type="text" id="login-id" placeholder="Contoh: GUS-001" required class="w-full px-4 py-3 rounded-xl bg-slate-950 border border-slate-800 text-white text-sm uppercase">
+                </div>
+                <div>
+                    <label class="block text-xs font-semibold text-slate-300 mb-1">Nama Lengkap Anggota</label>
+                    <input type="text" id="login-nama" placeholder="Nama sesuai daftar anggota" required class="w-full px-4 py-3 rounded-xl bg-slate-950 border border-slate-800 text-white text-sm">
+                </div>
+                <div class="flex gap-3">
+                    <button type="button" onclick="closeLoginModal()" class="w-1/2 py-3.5 rounded-xl bg-slate-800 text-slate-300 font-bold text-xs hover:bg-slate-700">Batal</button>
+                    <button type="submit" class="w-1/2 py-3.5 rounded-xl bg-emerald-500 text-slate-950 font-extrabold text-xs hover:bg-emerald-400 transition shadow-lg shadow-emerald-900/40">Verifikasi Masuk</button>
+                </div>
+            </form>
+        </div>
+    </div>
 
     <!-- MODAL KERANJANG & CHECKOUT MAPS -->
     <div id="modal-cart" class="fixed inset-0 z-50 bg-slate-950/80 backdrop-blur-md hidden items-center justify-center p-4">
@@ -461,7 +459,7 @@
         </div>
     </div>
 
-    <!-- JAVASCRIPT APLIKASI & MAPS INTERAKTIF -->
+    <!-- JAVASCRIPT APLIKASI & PERSISTENSI AUTO-LOGIN ANGGOTA -->
     <script>
         const validMembers = [
             { id: "GUS-001", nama: "Masdiyanto" },
@@ -511,6 +509,7 @@
 
         let products = JSON.parse(localStorage.getItem('ksu_products')) || initialProducts;
         let cart = [];
+        // Menggunakan LocalStorage agar status login bersifat PERMANEN otomatis saat web diakses
         let currentUser = JSON.parse(localStorage.getItem('ksu_logged_user')) || null;
         let transactions = JSON.parse(localStorage.getItem('ksu_transactions')) || [];
 
@@ -525,7 +524,7 @@
             setupEventListeners();
         });
 
-        // Navigasi Tab Utama
+        // Navigasi Tab Utama (Hanya Tentang Kami, Gus Mart, Laporan)
         function switchTab(tabId) {
             document.querySelectorAll('.tab-content').forEach(el => el.classList.remove('active'));
             document.getElementById('tab-' + tabId).classList.add('active');
@@ -542,6 +541,16 @@
 
         function toggleMobileMenu() {
             document.getElementById('mobile-menu').classList.toggle('hidden');
+        }
+
+        function openLoginModal() {
+            document.getElementById('modal-login').classList.remove('hidden');
+            document.getElementById('modal-login').classList.add('flex');
+        }
+
+        function closeLoginModal() {
+            document.getElementById('modal-login').classList.add('hidden');
+            document.getElementById('modal-login').classList.remove('flex');
         }
 
         function initInteractiveMap() {
@@ -616,6 +625,7 @@
                 .catch(() => {});
         }
 
+        // Render Tombol/Status Login di Pojok Kanan Atas
         function renderUserStatus() {
             const container = document.getElementById('user-status-area');
             const notice = document.getElementById('shop-access-notice');
@@ -630,17 +640,17 @@
                 `;
                 if(notice) {
                     notice.className = "p-4 rounded-xl bg-emerald-950/40 border border-emerald-800/60 text-emerald-300 text-xs flex items-center justify-between flex-wrap gap-2";
-                    notice.innerHTML = `<span>✨ Status: Login sebagai <strong>Anggota Koperasi</strong>. Menikmati Harga Spesial & Diskon Ongkir!</span>`;
+                    notice.innerHTML = `<span>✨ Status: Terverifikasi sebagai <strong>Anggota Koperasi (${currentUser.nama})</strong>. Otomatis menikmati Harga Khusus & Diskon Ongkir!</span>`;
                 }
             } else {
                 container.innerHTML = `
-                    <button onclick="switchTab('login')" class="px-4 py-2 rounded-full bg-slate-900 border border-slate-700 text-slate-200 font-bold text-xs hover:bg-slate-800 transition">
-                        Login Anggota
+                    <button onclick="openLoginModal()" class="px-4 py-2 rounded-full bg-emerald-500 text-slate-950 font-bold text-xs hover:bg-emerald-400 transition shadow-md shadow-emerald-900/40">
+                        Login Anggota 🔑
                     </button>
                 `;
                 if(notice) {
                     notice.className = "p-4 rounded-xl bg-slate-900 border border-slate-800 text-slate-300 text-xs flex items-center justify-between flex-wrap gap-2";
-                    notice.innerHTML = `<span>🛍️ Berbelanja sebagai <strong>Pembeli Umum</strong>. Ingin harga grosir khusus anggota? Silakan login.</span><button onclick="switchTab('login')" class="px-3 py-1.5 rounded-lg bg-emerald-500 text-slate-950 font-bold hover:bg-emerald-400 transition">Login Anggota</button>`;
+                    notice.innerHTML = `<span>🛍️ Berbelanja sebagai <strong>Pembeli Umum</strong>. Ingin harga grosir khusus anggota? Silakan login.</span><button onclick="openLoginModal()" class="px-3 py-1.5 rounded-lg bg-emerald-500 text-slate-950 font-bold hover:bg-emerald-400 transition">Login Anggota</button>`;
                 }
             }
             renderProducts('semua');
@@ -654,20 +664,23 @@
             const matched = validMembers.find(m => m.id === idInput && m.nama.toLowerCase() === namaInput.toLowerCase());
             if (matched) {
                 currentUser = matched;
+                // Simpan permanen ke localStorage
                 localStorage.setItem('ksu_logged_user', JSON.stringify(currentUser));
+                closeLoginModal();
                 renderUserStatus();
                 alert(`Berhasil Login sebagai Anggota: ${matched.nama} (${matched.id})`);
-                switchTab('gus-mart');
             } else {
                 alert('ID atau Nama Anggota tidak valid! Silakan cek kembali.');
             }
         });
 
         function logout() {
-            currentUser = null;
-            localStorage.removeItem('ksu_logged_user');
-            renderUserStatus();
-            alert('Anda telah keluar dari akun anggota.');
+            if (confirm('Apakah Anda yakin ingin keluar dari akun anggota?')) {
+                currentUser = null;
+                localStorage.removeItem('ksu_logged_user');
+                renderUserStatus();
+                alert('Anda telah keluar. Akses berbelanja kembali ke Harga Umum.');
+            }
         }
 
         function renderProducts(category) {
