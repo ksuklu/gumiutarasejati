@@ -1,0 +1,1128 @@
+<!DOCTYPE html>
+<html lang="id" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>KSU Gumi Utara Sejati — GUS MART (Koperasi & Umum)</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    
+    <!-- Leaflet CSS & JS untuk Peta Interaktif -->
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+    
+    <style>
+        body { font-family: 'Plus Jakarta Sans', sans-serif; }
+        #map { height: 240px; width: 100%; border-radius: 1rem; z-index: 10; }
+    </style>
+</head>
+<body class="bg-slate-950 text-slate-100 antialiased selection:bg-emerald-500 selection:text-slate-950">
+
+    <!-- 1. NAVBAR HEADER UTAMA -->
+    <header class="fixed top-0 left-0 right-0 z-50 bg-slate-950/95 backdrop-blur-md border-b border-slate-800/80">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between">
+            <a href="#beranda" class="flex items-center gap-3">
+                <img src="logo.jpeg" alt="Logo KSU Gumi Utara Sejati" class="w-10 h-10 rounded-xl object-cover shadow-lg shadow-emerald-900/40">
+                <div>
+                    <span class="block font-bold text-white text-sm sm:text-base leading-tight tracking-tight">KSU GUMI UTARA SEJATI</span>
+                    <span class="block text-xs text-emerald-400 font-medium">Kabupaten Lombok Utara, NTB</span>
+                </div>
+            </a>
+
+            <!-- Menu Desktop -->
+            <nav class="hidden lg:flex items-center gap-5 text-sm font-medium text-slate-300">
+                <a href="#beranda" class="hover:text-emerald-400 transition">Beranda</a>
+                <a href="#pendahuluan" class="hover:text-emerald-400 transition">1. Pendahuluan</a>
+                <a href="#tentang" class="hover:text-emerald-400 transition">2. Tentang Kami</a>
+                <a href="#gus-mart" class="hover:text-emerald-400 transition flex items-center gap-1.5 text-emerald-400 font-semibold">
+                    <span class="w-2 h-2 rounded-full bg-emerald-400 animate-ping"></span>
+                    GUS MART (Sembako)
+                </a>
+                <a href="#kegiatan" class="hover:text-emerald-400 transition">4. Kegiatan Usaha</a>
+                <a href="#profil-lengkap" class="hover:text-emerald-400 transition">Profil 2026</a>
+                <a href="#laporan-section" class="hover:text-emerald-400 transition">Admin & Laporan</a>
+            </nav>
+
+            <div class="flex items-center gap-3">
+                <div id="user-status-area"></div>
+                <button id="mobile-menu-btn" type="button" aria-label="Buka Menu" class="lg:hidden p-2.5 rounded-xl bg-slate-900 border border-slate-800 text-emerald-400 hover:text-white">
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path></svg>
+                </button>
+            </div>
+        </div>
+
+        <!-- Menu Mobile Dropdown -->
+        <div id="mobile-menu" class="hidden lg:hidden bg-slate-900 border-b border-slate-800 px-6 py-5 space-y-3 text-sm">
+            <a href="#beranda" class="mobile-link block px-3 py-2 rounded-lg text-slate-200 hover:bg-slate-800">Beranda</a>
+            <a href="#pendahuluan" class="mobile-link block px-3 py-2 rounded-lg text-slate-200 hover:bg-slate-800">1. Pendahuluan (Filosofi)</a>
+            <a href="#tentang" class="mobile-link block px-3 py-2 rounded-lg text-slate-200 hover:bg-slate-800">2. Tentang Kami & Tujuan</a>
+            <a href="#gus-mart" class="mobile-link block px-3 py-2 rounded-lg text-emerald-400 font-bold bg-slate-950">GUS MART (Katalog Sembako)</a>
+            <a href="#kegiatan" class="mobile-link block px-3 py-2 rounded-lg text-slate-200 hover:bg-slate-800">4. Kegiatan Usaha & Struktur</a>
+            <a href="#profil-lengkap" class="mobile-link block px-3 py-2 rounded-lg text-slate-200 hover:bg-slate-800">5-10. Kondisi, Mitra & Rapat</a>
+            <a href="#laporan-section" class="mobile-link block px-3 py-2 rounded-lg text-slate-200 hover:bg-slate-800">Admin & Laporan Keuangan</a>
+        </div>
+    </header>
+
+    <!-- 2. HERO SECTION -->
+    <section id="beranda" class="pt-36 pb-20 md:pt-48 md:pb-28 px-4 sm:px-6 lg:px-8 max-w-6xl mx-auto text-center relative">
+        <div class="absolute top-1/3 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[30rem] h-[30rem] bg-emerald-500/10 rounded-full blur-3xl -z-10 pointer-events-none"></div>
+
+        <div class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-emerald-950/80 border border-emerald-800/60 text-emerald-400 text-xs font-semibold mb-6">
+            <span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
+            KSU Gumi Utara Sejati — Koperasi Sehat, Mandiri & Sejahtera (Sejak 2021)
+        </div>
+
+        <h1 class="text-4xl sm:text-5xl md:text-6xl font-extrabold text-white tracking-tight leading-tight max-w-4xl mx-auto">
+            Belanja Kebutuhan Pokok <br><span class="text-emerald-400">Terbuka Untuk Umum & Harga Spesial Anggota</span>
+        </h1>
+
+        <p class="mt-6 text-slate-300 text-base sm:text-lg max-w-2xl mx-auto leading-relaxed">
+            Masyarakat umum maupun anggota koperasi dapat memesan kebutuhan melalui GUS MART. Nikmati layanan belanja online dengan pengantaran berbasis peta digital.
+        </p>
+
+        <div class="mt-10 flex flex-col sm:flex-row items-center justify-center gap-4">
+            <a href="#gus-mart" class="w-full sm:w-auto px-8 py-3.5 rounded-full bg-emerald-500 hover:bg-emerald-400 text-slate-950 font-extrabold text-base transition shadow-xl shadow-emerald-900/40">
+                Buka Katalog GUS MART 🛒
+            </a>
+            <button onclick="openLoginModal()" class="w-full sm:w-auto px-8 py-3.5 rounded-full bg-slate-900 hover:bg-slate-800 border border-slate-700 text-slate-200 font-bold text-base transition">
+                Login Anggota (Harga Khusus) 🔑
+            </button>
+        </div>
+    </section>
+
+    <!-- 3. KATALOG PRODUK GUS MART -->
+    <section id="gus-mart" class="py-16 bg-slate-900/60 border-y border-slate-800/80 scroll-mt-20">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-8">
+            <div class="flex flex-col md:flex-row md:items-end justify-between gap-4">
+                <div>
+                    <div class="inline-flex items-center gap-2 text-emerald-400 text-xs font-bold tracking-widest uppercase mb-1">
+                        <span>🏷️ Toko Sembako Koperasi</span>
+                    </div>
+                    <h2 class="text-3xl font-extrabold text-white">GUS MART</h2>
+                    <p class="text-slate-400 text-sm mt-1">Terbuka untuk Umum. Anggota terdaftar menikmati harga khusus otomatis.</p>
+                </div>
+
+                <div class="flex flex-wrap items-center gap-3">
+                    <button id="btn-usul-produk" class="px-4 py-2.5 rounded-xl bg-slate-800 hover:bg-slate-700 border border-slate-700 text-slate-200 text-xs font-semibold transition flex items-center gap-2">
+                        <span>💡 Usulkan Tambah Produk</span>
+                    </button>
+                    <button id="btn-open-cart" class="px-5 py-2.5 rounded-xl bg-emerald-500 hover:bg-emerald-400 text-slate-950 text-xs font-bold transition flex items-center gap-2 shadow-lg shadow-emerald-900/40 relative">
+                        <span>🛒 Keranjang Belanja</span>
+                        <span id="cart-badge" class="w-5 h-5 rounded-full bg-slate-950 text-emerald-400 text-[10px] font-extrabold flex items-center justify-center">0</span>
+                    </button>
+                </div>
+            </div>
+
+            <div id="shop-access-notice" class="p-4 rounded-xl bg-slate-900 border border-slate-800 text-slate-300 text-xs flex items-center justify-between flex-wrap gap-2">
+                <span>🛍️ Anda berbelanja sebagai <strong>Pembeli Umum</strong> (Harga Normal). Ingin harga lebih murah? Silakan login sebagai Anggota.</span>
+                <button onclick="openLoginModal()" class="px-3 py-1.5 rounded-lg bg-emerald-500 text-slate-950 font-bold hover:bg-emerald-400 transition">Login Anggota</button>
+            </div>
+
+            <div class="flex items-center gap-2 overflow-x-auto pb-2 text-xs font-semibold">
+                <button onclick="filterCategory('semua')" class="cat-btn px-4 py-2 rounded-xl bg-emerald-500 text-slate-950 whitespace-nowrap">Semua Sembako</button>
+                <button onclick="filterCategory('sembako')" class="cat-btn px-4 py-2 rounded-xl bg-slate-900 border border-slate-800 text-slate-300 hover:text-white whitespace-nowrap">Kebutuhan Pokok</button>
+                <button onclick="filterCategory('kuliner')" class="cat-btn px-4 py-2 rounded-xl bg-slate-900 border border-slate-800 text-slate-300 hover:text-white whitespace-nowrap">Kuliner Anggota</button>
+                <button onclick="filterCategory('pertanian')" class="cat-btn px-4 py-2 rounded-xl bg-slate-900 border border-slate-800 text-slate-300 hover:text-white whitespace-nowrap">Hasil Tani & Ternak</button>
+            </div>
+
+            <div id="product-grid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6"></div>
+        </div>
+    </section>
+
+    <!-- 4. SECTION 1: PENDAHULUAN & FILOSOFI NAMA -->
+    <section id="pendahuluan" class="py-20 px-4 sm:px-6 lg:px-8 max-w-6xl mx-auto scroll-mt-24 space-y-12">
+        <div class="text-center max-w-2xl mx-auto">
+            <span class="text-amber-400 text-xs font-bold tracking-widest uppercase">1. Pendahuluan</span>
+            <h2 class="text-3xl font-extrabold text-white mt-2">Apa Itu KSU Gumi Utara Sejati</h2>
+        </div>
+
+        <div class="grid md:grid-cols-3 gap-8">
+            <div class="p-8 rounded-2xl bg-slate-900 border border-slate-800 space-y-4">
+                <div class="w-10 h-10 rounded-xl bg-amber-500/10 text-amber-400 font-bold flex items-center justify-center text-lg">G</div>
+                <h3 class="text-xl font-bold text-amber-400">Gumi</h3>
+                <p class="text-sm text-slate-300 leading-relaxed">Artinya Bumi dalam bahasa Sasak (tanah kelahiran di Lombok Utara).</p>
+            </div>
+            <div class="p-8 rounded-2xl bg-slate-900 border border-slate-800 space-y-4">
+                <div class="w-10 h-10 rounded-xl bg-emerald-500/10 text-emerald-400 font-bold flex items-center justify-center text-lg">U</div>
+                <h3 class="text-xl font-bold text-emerald-400">Utara</h3>
+                <p class="text-sm text-slate-300 leading-relaxed">Berasal dan berpusat di wilayah Kabupaten Lombok Utara (KLU).</p>
+            </div>
+            <div class="p-8 rounded-2xl bg-slate-900 border border-slate-800 space-y-4">
+                <div class="w-10 h-10 rounded-xl bg-teal-500/10 text-teal-400 font-bold flex items-center justify-center text-lg">S</div>
+                <h3 class="text-xl font-bold text-teal-400">Sejati</h3>
+                <p class="text-sm text-slate-300 leading-relaxed">Menjadi koperasi yang sesungguhnya yang digagas oleh Bung Hatta.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- 5. SECTION 2: TENTANG KAMI, TUJUAN, VISI & MISI -->
+    <section id="tentang" class="py-20 bg-slate-900/40 border-y border-slate-800/80 scroll-mt-24">
+        <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 space-y-12">
+            <div class="text-center max-w-2xl mx-auto">
+                <span class="text-emerald-400 text-xs font-bold tracking-widest uppercase">2. Tentang Kami</span>
+                <h2 class="text-3xl font-extrabold text-white mt-2">Sejarah, Komposisi Anggota & Tujuan Koperasi</h2>
+            </div>
+
+            <div class="grid md:grid-cols-2 gap-8">
+                <!-- Sejarah & Anggota -->
+                <div class="p-8 rounded-3xl bg-slate-900 border border-slate-800 space-y-4">
+                    <h3 class="text-lg font-bold text-amber-400">📋 Profil Pembentukan & Anggota</h3>
+                    <ul class="space-y-2 text-xs text-slate-300 leading-relaxed">
+                        <li>• <strong>Dibentuk:</strong> Tahun 2021</li>
+                        <li>• <strong>Pendiri:</strong> 36 UMKM Kabupaten Lombok Utara (KLU)</li>
+                        <li>• <strong>Pengawas:</strong> 3 Orang</li>
+                        <li>• <strong>Pengurus:</strong> 3 Orang</li>
+                        <li>• <strong>Jumlah Anggota:</strong> Perempuan 28 orang, Laki-laki 8 orang (Total 36 orang)</li>
+                        <li>• <strong>Profil Usaha Anggota:</strong> Semua anggota memiliki usaha yang sudah berjalan di atas dua tahun meliputi kuliner, restoran dan penginapan, jajanan, kerajinan, pedagang kelontong, suplier, petani, peternakan, hingga perkebunan.</li>
+                    </ul>
+                </div>
+
+                <!-- Visi & Misi -->
+                <div class="p-8 rounded-3xl bg-slate-900 border border-slate-800 space-y-4">
+                    <h3 class="text-lg font-bold text-emerald-400">🌟 Visi & Misi Koperasi</h3>
+                    <div>
+                        <span class="text-xs font-bold text-slate-400 block uppercase">Visi:</span>
+                        <p class="text-xs text-emerald-300 italic mt-1">"Menjadi salah satu koperasi yang sehat, mandiri dan mensejahterakan anggotanya."</p>
+                    </div>
+                    <div>
+                        <span class="text-xs font-bold text-slate-400 block uppercase mt-2">Misi:</span>
+                        <ul class="space-y-1 text-xs text-slate-300 mt-1">
+                            <li>a. Memperkuat kelembagaan.</li>
+                            <li>b. Memberikan pelatihan koperasi kepada anggota.</li>
+                            <li>c. Memberikan pelatihan-pelatihan produk, pemasaran, keuangan, digital, pengelolaan usaha, dsb kepada anggota.</li>
+                            <li>d. Memperluas pasar anggota di luar KLU.</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Tujuan Koperasi -->
+            <div class="p-8 rounded-3xl bg-slate-900 border border-slate-800 space-y-4">
+                <h3 class="text-lg font-bold text-teal-400">🎯 Tujuan Koperasi</h3>
+                <div class="grid md:grid-cols-3 gap-4 text-xs text-slate-300">
+                    <div class="p-3 rounded-xl bg-slate-950 border border-slate-800">
+                        <strong>a.</strong> Membantu memasarkan produk UMKM KLU.
+                    </div>
+                    <div class="p-3 rounded-xl bg-slate-950 border border-slate-800">
+                        <strong>b.</strong> Meningkatkan kualitas produk UMKM KLU.
+                    </div>
+                    <div class="p-3 rounded-xl bg-slate-950 border border-slate-800">
+                        <strong>c.</strong> Menyediakan kebutuhan usaha UMKM KLU.
+                    </div>
+                    <div class="p-3 rounded-xl bg-slate-950 border border-slate-800">
+                        <strong>d.</strong> Menyediakan kebutuhan rumah tangga UMKM KLU.
+                    </div>
+                    <div class="p-3 rounded-xl bg-slate-950 border border-slate-800">
+                        <strong>e.</strong> Meningkatkan SDM UMKM KLU.
+                    </div>
+                    <div class="p-3 rounded-xl bg-slate-950 border border-slate-800">
+                        <strong>f.</strong> Membantu kebutuhan modal usaha anggota.
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 6. SECTION 4 & 7: KEGIATAN USAHA & STRUKTUR KELEMBAGAAN -->
+    <section id="kegiatan" class="py-20 px-4 sm:px-6 lg:px-8 max-w-6xl mx-auto scroll-mt-24 space-y-12">
+        <div class="text-center max-w-2xl mx-auto">
+            <span class="text-amber-400 text-xs font-bold tracking-widest uppercase">4 & 7. Kegiatan Usaha & Struktur</span>
+            <h2 class="text-3xl font-extrabold text-white mt-2">Unit Usaha & Struktur Organisasi</h2>
+        </div>
+
+        <div class="grid md:grid-cols-4 gap-6 text-center">
+            <div class="p-6 bg-slate-900 rounded-2xl border border-slate-800">
+                <span class="block text-3xl font-extrabold text-amber-400">36</span>
+                <span class="text-xs text-slate-400 mt-2 block font-medium">Pendiri Koperasi</span>
+            </div>
+            <div class="p-6 bg-slate-900 rounded-2xl border border-slate-800">
+                <span class="block text-3xl font-extrabold text-emerald-400">3 Orang</span>
+                <span class="text-xs text-slate-400 mt-2 block font-medium">Pengurus Inti</span>
+            </div>
+            <div class="p-6 bg-slate-900 rounded-2xl border border-slate-800">
+                <span class="block text-3xl font-extrabold text-teal-400">3 Orang</span>
+                <span class="text-xs text-slate-400 mt-2 block font-medium">Pengawas</span>
+            </div>
+            <div class="p-6 bg-slate-900 rounded-2xl border border-slate-800">
+                <span class="block text-3xl font-extrabold text-indigo-400">6 Unit</span>
+                <span class="text-xs text-slate-400 mt-2 block font-medium">Sektor Usaha</span>
+            </div>
+        </div>
+
+        <!-- Kegiatan Usaha Detail -->
+        <div class="grid md:grid-cols-4 gap-6">
+            <div class="p-6 bg-slate-900 rounded-2xl border border-slate-800 space-y-2">
+                <span class="text-emerald-400 text-xs font-bold">a. Usaha Pokok</span>
+                <p class="text-xs text-slate-400">Simpan pinjam dan pengadaan kebutuhan pokok rumah tangga melalui platform GUS MART.</p>
+            </div>
+            <div class="p-6 bg-slate-900 rounded-2xl border border-slate-800 space-y-2">
+                <span class="text-emerald-400 text-xs font-bold">b. Usaha Pendukung</span>
+                <p class="text-xs text-slate-400">Pemasaran digital produk UMKM lokal KLU dan layanan kurir pengantaran barang.</p>
+            </div>
+            <div class="p-6 bg-slate-900 rounded-2xl border border-slate-800 space-y-2">
+                <span class="text-emerald-400 text-xs font-bold">c. Usaha Tambahan</span>
+                <p class="text-xs text-slate-400">Pelatihan peningkatan SDM, pelatihan produk, keuangan, dan digitalisasi usaha.</p>
+            </div>
+            <div class="p-6 bg-slate-900 rounded-2xl border border-slate-800 space-y-2">
+                <span class="text-emerald-400 text-xs font-bold">d. Pengembangan Usaha</span>
+                <p class="text-xs text-slate-400">Ekspansi jaringan pasar dan kemitraan strategis di luar wilayah Kabupaten Lombok Utara.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- 7. SECTION 3, 5, 6, 8, 9: KONDISI 2026, YANG SUDAH DILAKUKAN, MITRA, RAPAT & MODAL AWAL -->
+    <section id="profil-lengkap" class="py-20 bg-slate-900/40 border-y border-slate-800/80 scroll-mt-24">
+        <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 space-y-10">
+            <div class="text-center max-w-2xl mx-auto">
+                <span class="text-emerald-400 text-xs font-bold tracking-widest uppercase">Perkembangan & Operasional</span>
+                <h2 class="text-3xl font-extrabold text-white mt-2">Kondisi 2026, Kinerja & Tata Kelola</h2>
+            </div>
+
+            <div class="grid md:grid-cols-3 gap-6 text-xs text-slate-300">
+                <div class="p-6 rounded-2xl bg-slate-900 border border-slate-800 space-y-3">
+                    <h3 class="font-bold text-amber-400 text-sm">3. Kondisi Saat Ini (Tahun 2026)</h3>
+                    <p class="leading-relaxed">Koperasi aktif mengembangkan ekonomi digital, memperluas jangkauan pasar produk anggota secara online melalui GUS MART, serta memperkuat sistem layanan antar berbasis peta digital di KLU.</p>
+                </div>
+                <div class="p-6 rounded-2xl bg-slate-900 border border-slate-800 space-y-3">
+                    <h3 class="font-bold text-emerald-400 text-sm">5. Yang Sudah Dilakukan</h3>
+                    <p class="leading-relaxed">Penguatan kelembagaan, pelaksanaan pelatihan rutin bagi UMKM anggota, fasilitasi pemasaran produk kuliner & kerajinan, serta stabilisasi harga sembako untuk anggota dan masyarakat.</p>
+                </div>
+                <div class="p-6 rounded-2xl bg-slate-900 border border-slate-800 space-y-3">
+                    <h3 class="font-bold text-teal-400 text-sm">6. Mitra Koperasi</h3>
+                    <p class="leading-relaxed">Bekerja sama dengan jaringan UMKM lokal, pemasok/suplier regional, pemerintah daerah, serta platform teknologi digital pendukung sirkulasi ekonomi kerakyatan.</p>
+                </div>
+                <div class="p-6 rounded-2xl bg-slate-900 border border-slate-800 space-y-3">
+                    <h3 class="font-bold text-indigo-400 text-sm">8. Rapat Anggota</h3>
+                    <p class="leading-relaxed">Secara konsisten melaksanakan Rapat Anggota Tahunan (RAT) dan rapat koordinasi berkala guna mengevaluasi kinerja serta menyusun strategi pengembangan usaha.</p>
+                </div>
+                <div class="p-6 rounded-2xl bg-slate-900 border border-slate-800 space-y-3 md:col-span-2">
+                    <h3 class="font-bold text-amber-400 text-sm">9. Modal Awal & Penguatan</h3>
+                    <p class="leading-relaxed">Bersumber dari simpanan pokok dan simpanan wajib 36 pendiri UMKM KLU, yang kemudian dikelola secara transparan dan akuntabel untuk membiayai kegiatan simpan pinjam serta unit usaha produktif.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 8. LAPORAN KEUANGAN & HISTORI TRANSAKSI -->
+    <section id="laporan-section" class="py-20 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto scroll-mt-24 space-y-12">
+        <div class="flex flex-col md:flex-row md:items-end justify-between gap-4">
+            <div>
+                <span class="text-emerald-400 text-xs font-bold tracking-widest uppercase">Transparansi Koperasi</span>
+                <h2 class="text-3xl font-extrabold text-white mt-1">Laporan Arus Kas & Histori Transaksi GUS MART</h2>
+                <p class="text-xs text-slate-400">Pencatatan sirkulasi pemasukan, pengeluaran, dan status pengantaran barang secara transparan.</p>
+            </div>
+            <button onclick="renderDashboard()" class="px-4 py-2 rounded-xl bg-slate-900 border border-slate-800 text-slate-300 text-xs font-semibold hover:text-white">🔄 Refresh Laporan</button>
+        </div>
+
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+            <div class="p-6 rounded-2xl bg-slate-900 border border-slate-800 space-y-1">
+                <span class="text-xs text-slate-400 font-medium">Total Omzet Penjualan</span>
+                <h3 id="stat-omzet" class="text-2xl font-extrabold text-emerald-400">Rp 0</h3>
+            </div>
+            <div class="p-6 rounded-2xl bg-slate-900 border border-slate-800 space-y-1">
+                <span class="text-xs text-slate-400 font-medium">Modal Pengadaan (HPP)</span>
+                <h3 id="stat-modal" class="text-2xl font-extrabold text-amber-400">Rp 0</h3>
+            </div>
+            <div class="p-6 rounded-2xl bg-slate-900 border border-slate-800 space-y-1">
+                <span class="text-xs text-slate-400 font-medium">Margin Bersih Koperasi</span>
+                <h3 id="stat-margin" class="text-2xl font-extrabold text-teal-400">Rp 0</h3>
+            </div>
+            <div class="p-6 rounded-2xl bg-slate-900 border border-slate-800 space-y-1">
+                <span class="text-xs text-slate-400 font-medium">Total Pesanan Sukses</span>
+                <h3 id="stat-count" class="text-2xl font-extrabold text-indigo-400">0 Transaksi</h3>
+            </div>
+        </div>
+
+        <div class="bg-slate-900 border border-slate-800 rounded-3xl overflow-hidden p-6 space-y-4">
+            <h3 class="text-lg font-bold text-white">📑 Histori Transaksi & Status Pengantaran</h3>
+            <div class="overflow-x-auto">
+                <table class="w-full text-left text-xs text-slate-300">
+                    <thead class="bg-slate-950 text-slate-400 uppercase font-bold text-[10px]">
+                        <tr>
+                            <th class="p-3">ID Invoice</th>
+                            <th class="p-3">Nama Pemesan</th>
+                            <th class="p-3">Item Sembako</th>
+                            <th class="p-3">Total (+Ongkir)</th>
+                            <th class="p-3">Metode / Lokasi</th>
+                            <th class="p-3">Status Pengantaran</th>
+                            <th class="p-3 text-center">Aksi / Konfirmasi Tiba</th>
+                        </tr>
+                    </thead>
+                    <tbody id="transaction-table-body" class="divide-y divide-slate-800"></tbody>
+                </table>
+            </div>
+        </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer class="bg-slate-950 border-t border-slate-800/80 py-12">
+        <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col md:flex-row items-center justify-between gap-6">
+            <div>
+                <span class="font-bold text-white text-base">KSU GUMI UTARA SEJATI</span>
+                <p class="text-xs text-slate-400 mt-1">&copy; 2026 KSU Gumi Utara Sejati. Lombok Utara, NTB.</p>
+            </div>
+            <a href="https://wa.me/6281944502860?text=Halo%2C%20saya%20tertarik%20dengan%20KSU%20Gumi%20Utara%20Sejati" target="_blank" class="px-6 py-3 rounded-full bg-emerald-500 hover:bg-emerald-400 text-slate-950 font-bold text-sm transition">
+                Hubungi Admin via WhatsApp
+            </a>
+        </div>
+    </footer>
+
+    <!-- TOMBOL WA FLOATING -->
+    <a href="https://wa.me/6281944502860?text=Halo%2C%20saya%20tertarik%20dengan%20KSU%20Gumi%20Utara%20Sejati" target="_blank" class="fixed bottom-6 right-6 z-50 w-14 h-14 bg-emerald-500 hover:bg-emerald-400 text-slate-950 rounded-full flex items-center justify-center shadow-2xl hover:scale-110 transition duration-300">
+        <svg class="w-8 h-8 fill-current" viewBox="0 0 24 24"><path d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946.003-6.556 5.338-11.891 11.893-11.891 3.181.001 6.167 1.24 8.413 3.488 2.245 2.248 3.481 5.236 3.48 8.414-.003 6.557-5.338 11.892-11.893 11.892-1.99-.001-3.951-.5-5.688-1.448l-6.305 1.654zm6.597-3.807c1.676.995 3.276 1.591 5.392 1.592 5.448 0 9.886-4.434 9.889-9.885.002-5.462-4.415-9.89-9.881-9.892-5.452 0-9.887 4.434-9.889 9.884-.001 2.225.651 3.891 1.746 5.634l-.999 3.648 3.742-.981z"/></svg>
+    </a>
+
+    <!-- MODAL LOGIN ANGGOTA -->
+    <div id="modal-login" class="fixed inset-0 z-50 bg-slate-950/80 backdrop-blur-md hidden items-center justify-center p-4">
+        <div class="bg-slate-900 border border-slate-800 p-8 rounded-3xl max-w-md w-full space-y-6">
+            <div class="text-center">
+                <h3 class="text-2xl font-bold text-white">Login Verifikasi Anggota</h3>
+                <p class="text-xs text-slate-400 mt-1">Masukkan ID & Nama salah satu dari 36 Anggota Resmi Koperasi.</p>
+                <div class="mt-3 p-2.5 rounded-xl bg-slate-950 text-[11px] text-emerald-400 text-left border border-slate-800 max-h-32 overflow-y-auto">
+                    💡 <strong>Contoh ID Anggota (GUS-001 s.d GUS-036):</strong><br>
+                    • GUS-001: Masdiyanto | GUS-002: Siti Aminah<br>
+                    • GUS-003: Wayan Sudarma | GUS-004: Baiq Nurul<br>
+                    • GUS-005: Lalu Sastrawan | ... hingga GUS-036.
+                </div>
+            </div>
+            <form id="form-login" class="space-y-4">
+                <div>
+                    <label class="block text-xs font-semibold text-slate-300 mb-1">Nomor ID Anggota</label>
+                    <input type="text" id="login-id" placeholder="Contoh: GUS-001" required class="w-full px-4 py-3 rounded-xl bg-slate-950 border border-slate-800 text-white text-sm focus:outline-none focus:border-emerald-500 uppercase">
+                </div>
+                <div>
+                    <label class="block text-xs font-semibold text-slate-300 mb-1">Nama Lengkap Anggota</label>
+                    <input type="text" id="login-nama" placeholder="Nama sesuai daftar anggota" required class="w-full px-4 py-3 rounded-xl bg-slate-950 border border-slate-800 text-white text-sm focus:outline-none focus:border-emerald-500">
+                </div>
+                <div class="pt-2 flex gap-3">
+                    <button type="button" onclick="closeLoginModal()" class="w-1/2 py-3 rounded-xl bg-slate-800 text-slate-300 text-xs font-bold hover:bg-slate-700">Batal</button>
+                    <button type="submit" class="w-1/2 py-3 rounded-xl bg-emerald-500 text-slate-950 text-xs font-bold hover:bg-emerald-400">Verifikasi Masuk</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- MODAL KERANJANG & CHECKOUT DENGAN MAPS & ONGKIR -->
+    <div id="modal-cart" class="fixed inset-0 z-50 bg-slate-950/80 backdrop-blur-md hidden items-center justify-center p-4">
+        <div class="bg-slate-900 border border-slate-800 p-6 md:p-8 rounded-3xl max-w-xl w-full space-y-6 max-h-[90vh] overflow-y-auto">
+            <div class="flex items-center justify-between">
+                <h3 class="text-xl font-bold text-white flex items-center gap-2">
+                    <span>🛒 Keranjang & Pengantaran</span>
+                    <span id="cart-mode-badge" class="text-xs text-emerald-400 font-normal">(Harga Umum)</span>
+                </h3>
+                <button onclick="closeCartModal()" class="text-slate-400 hover:text-white text-lg font-bold">✕</button>
+            </div>
+
+            <!-- List Cart Items -->
+            <div id="cart-items-container" class="space-y-3 divide-y divide-slate-800 max-h-48 overflow-y-auto pr-1"></div>
+
+            <div class="border-t border-slate-800 pt-3 space-y-1 text-xs">
+                <div class="flex justify-between text-slate-300">
+                    <span>Subtotal Belanja:</span>
+                    <span id="cart-subtotal" class="font-bold">Rp 0</span>
+                </div>
+                <div class="flex justify-between text-slate-300">
+                    <span>Estimasi Berat Total:</span>
+                    <span id="cart-total-weight" class="font-bold text-amber-400">0 Kg</span>
+                </div>
+                <div class="flex justify-between text-slate-300">
+                    <span>Biaya Pengantaran (<span id="distance-text">0 km</span>):</span>
+                    <span id="delivery-cost-display" class="font-bold text-teal-400">Rp 0</span>
+                </div>
+                <div class="flex justify-between text-sm pt-2 border-t border-slate-800">
+                    <span class="text-slate-200 font-bold">Total Keseluruhan:</span>
+                    <span id="cart-total" class="font-extrabold text-emerald-400 text-base">Rp 0</span>
+                </div>
+            </div>
+
+            <!-- Form Pengiriman & Pilihan Diantar/Tidak -->
+            <form id="form-checkout" class="space-y-4 pt-2 border-t border-slate-800">
+                <h4 class="text-xs font-bold uppercase tracking-wider text-amber-400">📦 Metode Pengantaran & Alamat</h4>
+                
+                <div id="checkout-guest-fields" class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                    <div>
+                        <label class="block text-xs font-semibold text-slate-300 mb-1">Nama Pemesan</label>
+                        <input type="text" id="guest-nama" placeholder="Nama Anda" class="w-full px-3 py-2 rounded-xl bg-slate-950 border border-slate-800 text-white text-xs">
+                    </div>
+                    <div>
+                        <label class="block text-xs font-semibold text-slate-300 mb-1">No. WhatsApp</label>
+                        <input type="text" id="guest-hp" placeholder="08xxxxxxxxxx" class="w-full px-3 py-2 rounded-xl bg-slate-950 border border-slate-800 text-white text-xs">
+                    </div>
+                </div>
+
+                <div>
+                    <label class="block text-xs font-semibold text-slate-300 mb-1">Pilihan Layanan Pengantaran</label>
+                    <select id="checkout-method" onchange="toggleDeliveryOptions()" required class="w-full px-3 py-2 rounded-xl bg-slate-950 border border-slate-800 text-white text-xs">
+                        <option value="Diantar ke Alamat Pemesan">🚚 Ya, Diantar ke Alamat (Pilih Titik di Peta)</option>
+                        <option value="Diambil Sendiri di Koperasi">🚶‍♂️ Tidak Diantar (Ambil Sendiri di Koperasi - Gratis Ongkir)</option>
+                    </select>
+                </div>
+
+                <!-- PETA INTERAKTIF & ALAMAT OTOMATIS -->
+                <div id="delivery-maps-section" class="space-y-3 p-3 rounded-2xl bg-slate-950 border border-slate-800">
+                    <div class="flex justify-between items-center text-xs">
+                        <span class="font-bold text-emerald-400">🗺️ Pilih Titik Lokasi di Peta (Klik / Geser Pin)</span>
+                        <button type="button" onclick="detectUserLocation()" class="px-2.5 py-1 rounded-lg bg-slate-800 hover:bg-slate-700 text-slate-200 text-[10px]">📍 Gunakan GPS Saya</button>
+                    </div>
+                    
+                    <!-- Container Peta Leaflet -->
+                    <div id="map"></div>
+
+                    <div class="grid grid-cols-2 gap-2">
+                        <div>
+                            <label class="block text-slate-400 text-[10px] mb-1">Latitude</label>
+                            <input type="text" id="dest-lat" value="-8.3650" readonly class="w-full px-3 py-1.5 rounded-lg bg-slate-900 border border-slate-800 text-slate-300 text-xs">
+                        </div>
+                        <div>
+                            <label class="block text-slate-400 text-[10px] mb-1">Longitude</label>
+                            <input type="text" id="dest-lng" value="116.3500" readonly class="w-full px-3 py-1.5 rounded-lg bg-slate-900 border border-slate-800 text-slate-300 text-xs">
+                        </div>
+                    </div>
+                </div>
+
+                <div>
+                    <label class="block text-xs font-semibold text-slate-300 mb-1">Detail Alamat Lengkap (Terisi Otomatis / Bisa Ketik Manual)</label>
+                    <textarea id="checkout-note" onchange="geocodeAddressToMap()" placeholder="Klik lokasi pada peta atau ketik detail alamat (Dusun, Desa, Kecamatan)..." class="w-full px-3 py-2 rounded-xl bg-slate-950 border border-slate-800 text-white text-xs h-20"></textarea>
+                    <p class="text-[10px] text-slate-400 mt-1 italic">*Menggeser pin di peta akan mengisi kolom alamat secara otomatis, atau mengetik nama dusun/desa di sini akan memindahkan titik peta secara otomatis.</p>
+                </div>
+
+                <button type="submit" class="w-full py-3.5 rounded-xl bg-emerald-500 hover:bg-emerald-400 text-slate-950 text-xs font-extrabold shadow-lg shadow-emerald-900/40">
+                    Kirim Pesanan ke WhatsApp Admin 📲
+                </button>
+            </form>
+        </div>
+    </div>
+
+    <!-- MODAL USULAN PRODUK -->
+    <div id="modal-usul" class="fixed inset-0 z-50 bg-slate-950/80 backdrop-blur-md hidden items-center justify-center p-4">
+        <div class="bg-slate-900 border border-slate-800 p-8 rounded-3xl max-w-md w-full space-y-6">
+            <div class="text-center">
+                <h3 class="text-xl font-bold text-white">Usulkan Produk Sembako Baru</h3>
+                <p class="text-xs text-slate-400 mt-1">Usulkan barang kebutuhan yang ingin disediakan oleh koperasi.</p>
+            </div>
+            <form id="form-usul" class="space-y-4">
+                <div>
+                    <label class="block text-xs font-semibold text-slate-300 mb-1">Nama Barang / Sembako</label>
+                    <input type="text" id="usul-nama" required placeholder="Contoh: Tepung Terigu 1kg" class="w-full px-4 py-2.5 rounded-xl bg-slate-950 border border-slate-800 text-white text-xs">
+                </div>
+                <div>
+                    <label class="block text-xs font-semibold text-slate-300 mb-1">Estimasi Harga (Rp)</label>
+                    <input type="number" id="usul-harga" required placeholder="14000" class="w-full px-4 py-2.5 rounded-xl bg-slate-950 border border-slate-800 text-white text-xs">
+                </div>
+                <div>
+                    <label class="block text-xs font-semibold text-slate-300 mb-1">Keterangan / Alasan</label>
+                    <textarea id="usul-ket" required placeholder="Banyak warga yang memerlukan..." class="w-full px-4 py-2 rounded-xl bg-slate-950 border border-slate-800 text-white text-xs h-20"></textarea>
+                </div>
+                <div class="flex gap-3">
+                    <button type="button" onclick="closeUsulModal()" class="w-1/2 py-3 rounded-xl bg-slate-800 text-slate-300 text-xs font-bold">Batal</button>
+                    <button type="submit" class="w-1/2 py-3 rounded-xl bg-emerald-500 text-slate-950 text-xs font-bold">Kirim Usulan</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- LOGIKA JAVASCRIPT APLIKASI & MAPS INTERAKTIF -->
+    <script>
+        const validMembers = [
+            { id: "GUS-001", nama: "Masdiyanto" },
+            { id: "GUS-002", nama: "Siti Aminah" },
+            { id: "GUS-003", nama: "Wayan Sudarma" },
+            { id: "GUS-004", nama: "Baiq Nurul" },
+            { id: "GUS-005", nama: "Lalu Sastrawan" },
+            { id: "GUS-006", nama: "Budi Santoso" },
+            { id: "GUS-007", nama: "Dewi Lestari" },
+            { id: "GUS-008", nama: "Ahmad Zaini" },
+            { id: "GUS-009", nama: "Suharti" },
+            { id: "GUS-010", nama: "Kadek Artawan" },
+            { id: "GUS-011", nama: "Jumarsa" },
+            { id: "GUS-012", nama: "Rusnah" },
+            { id: "GUS-013", nama: "Herman" },
+            { id: "GUS-014", nama: "Nur Aisyah" },
+            { id: "GUS-015", nama: "Gede Suardana" },
+            { id: "GUS-016", nama: "Mianah" },
+            { id: "GUS-017", nama: "Sahru Ramadhan" },
+            { id: "GUS-018", nama: "Zohriah" },
+            { id: "GUS-019", nama: "Supardi" },
+            { id: "GUS-020", nama: "Rismawati" },
+            { id: "GUS-021", nama: "Made Wirawan" },
+            { id: "GUS-022", nama: "Sainah" },
+            { id: "GUS-023", nama: "Mulyadi" },
+            { id: "GUS-024", nama: "Jamilah" },
+            { id: "GUS-025", nama: "Syamsul Hadi" },
+            { id: "GUS-026", nama: "Rosita" },
+            { id: "GUS-027", nama: "Ketut Sugiartha" },
+            { id: "GUS-028", nama: "Siti Halimah" },
+            { id: "GUS-029", nama: "Junaidi" },
+            { id: "GUS-030", nama: "Mastur" },
+            { id: "GUS-031", nama: "Ni Luh Puji" },
+            { id: "GUS-032", nama: "Sahnan" },
+            { id: "GUS-033", nama: "Siti Rahmah" },
+            { id: "GUS-034", nama: "Muhamad Ali" },
+            { id: "GUS-035", nama: "Zainudin" },
+            { id: "GUS-036", nama: "Hj. Maimunah" }
+        ];
+
+        const initialProducts = [
+            { id: 1, nama: "Beras Super KLU 5kg", kategori: "sembako", hargaAnggota: 65000, hargaUmum: 72000, modal: 60000, berat: 5.0, stok: 45, deskripsi: "Beras putih lokal Lombok Utara kualitas super." },
+            { id: 2, nama: "Minyak Goreng Premium 2L", kategori: "sembako", hargaAnggota: 32000, hargaUmum: 36000, modal: 30000, berat: 2.0, stok: 30, deskripsi: "Minyak kelapa sawit jernih kemasan 2 liter." },
+            { id: 3, nama: "Gula Pasir Putih 1kg", kategori: "sembako", hargaAnggota: 16500, hargaUmum: 18500, modal: 15500, berat: 1.0, stok: 60, deskripsi: "Gula murni manis higienis kemasan 1kg." },
+            { id: 4, nama: "Telur Ayam Ras (1 Karpet)", kategori: "pertanian", hargaAnggota: 49000, hargaUmum: 55000, modal: 46000, berat: 1.5, stok: 25, deskripsi: "Telur segar hasil peternakan lokal." }
+        ];
+
+        let products = JSON.parse(localStorage.getItem('ksu_products')) || initialProducts;
+        let cart = [];
+        let currentUser = JSON.parse(localStorage.getItem('ksu_logged_user')) || null;
+        let transactions = JSON.parse(localStorage.getItem('ksu_transactions')) || [];
+
+        // Titik Koordinat Pusat Koperasi KLU (Tanjung / Lombok Utara)
+        const coopLocation = { lat: -8.3582, lng: 116.1550 };
+        let leafletMap = null;
+        let userMarker = null;
+
+        document.addEventListener('DOMContentLoaded', () => {
+            renderUserStatus();
+            renderProducts('semua');
+            renderDashboard();
+            setupEventListeners();
+        });
+
+        function initInteractiveMap() {
+            if (leafletMap) {
+                setTimeout(() => leafletMap.invalidateSize(), 300);
+                return;
+            }
+
+            // Inisialisasi Peta Leaflet
+            leafletMap = L.map('map').setView([coopLocation.lat, coopLocation.lng], 12);
+            L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+                attribution: '&copy; OpenStreetMap'
+            }).addTo(leafletMap);
+
+            // Marker Koperasi (Asal)
+            L.marker([coopLocation.lat, coopLocation.lng])
+                .addTo(leafletMap)
+                .bindPopup("<b>Base Koperasi GUS MART</b><br>Titik Awal Pengantaran")
+                .openPopup();
+
+            // Marker Tujuan Pengantaran (Dapat digeser)
+            userMarker = L.marker([coopLocation.lat - 0.005, coopLocation.lng + 0.005], { draggable: true })
+                .addTo(leafletMap)
+                .bindPopup("<b>Titik Pengantaran Anda</b><br>Geser pin ini ke lokasi persis Anda");
+
+            // Event saat Pin digeser oleh pemesan
+            userMarker.on('dragend', function (e) {
+                const coord = e.target.getLatLng();
+                updateLocationFields(coord.lat, coord.lng);
+            });
+
+            // Event saat Peta diklik oleh pemesan
+            leafletMap.on('click', function (e) {
+                userMarker.setLatLng(e.latlng);
+                updateLocationFields(e.latlng.lat, e.latlng.lng);
+            });
+
+            updateLocationFields(coopLocation.lat - 0.005, coopLocation.lng + 0.005);
+        }
+
+        // Update Kolom Alamat & Koordinat dari Peta (Reverse Geocoding OpenStreetMap Nominatim)
+        function updateLocationFields(lat, lng) {
+            document.getElementById('dest-lat').value = lat.toFixed(5);
+            document.getElementById('dest-lng').value = lng.toFixed(5);
+            calculateDelivery();
+
+            // Ambil Nama Jalan, Desa, Kecamatan via Nominatim API secara otomatis
+            fetch(`https://nominatim.openstreetmap.org/reverse?format=json&lat=${lat}&lon=${lng}`)
+                .then(res => res.json())
+                .then(data => {
+                    if (data && data.address) {
+                        const addr = data.address;
+                        const jalan = addr.road || addr.suburb || addr.hamlet || '';
+                        const desa = addr.village || addr.town || addr.city_district || '';
+                        const kec = addr.county || addr.state_district || '';
+                        const kab = addr.state || '';
+                        
+                        const detailAddress = [jalan, desa, kec, kab].filter(Boolean).join(', ');
+                        if (detailAddress) {
+                            document.getElementById('checkout-note').value = detailAddress;
+                        }
+                    }
+                })
+                .catch(() => {});
+        }
+
+        // Jika Pemesan Memasukkan/Mengedit Teks Alamat, Peta Berpindah Otomatis (Geocoding)
+        function geocodeAddressToMap() {
+            const query = document.getElementById('checkout-note').value.trim();
+            if (!query || query.length < 4) return;
+
+            fetch(`https://nominatim.openstreetmap.org/search?format=json&q=${encodeURIComponent(query + ', Lombok Utara')}`)
+                .then(res => res.json())
+                .then(results => {
+                    if (results && results.length > 0) {
+                        const lat = parseFloat(results[0].lat);
+                        const lon = parseFloat(results[0].lon);
+                        leafletMap.setView([lat, lon], 15);
+                        userMarker.setLatLng([lat, lon]);
+                        document.getElementById('dest-lat').value = lat.toFixed(5);
+                        document.getElementById('dest-lng').value = lon.toFixed(5);
+                        calculateDelivery();
+                    }
+                })
+                .catch(() => {});
+        }
+
+        function renderUserStatus() {
+            const container = document.getElementById('user-status-area');
+            const notice = document.getElementById('shop-access-notice');
+
+            if (currentUser) {
+                container.innerHTML = `
+                    <div class="flex items-center gap-2 bg-emerald-950/80 border border-emerald-800 px-3 py-1.5 rounded-full text-xs">
+                        <span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
+                        <span class="text-emerald-300 font-bold">${currentUser.nama} (ID: ${currentUser.id})</span>
+                        <button onclick="logout()" class="ml-2 text-red-400 hover:text-red-300 font-bold">Keluar</button>
+                    </div>
+                `;
+                if(notice) {
+                    notice.className = "p-4 rounded-xl bg-emerald-950/40 border border-emerald-800/60 text-emerald-300 text-xs flex items-center justify-between flex-wrap gap-2";
+                    notice.innerHTML = `<span>✨ Status: Login sebagai <strong>Anggota Koperasi</strong>. Menikmati Harga Spesial & Diskon Ongkir!</span>`;
+                }
+            } else {
+                container.innerHTML = `
+                    <button onclick="openLoginModal()" class="px-4 py-2 rounded-full bg-slate-900 border border-slate-700 text-slate-200 font-bold text-xs hover:bg-slate-800 transition">
+                        Login Anggota
+                    </button>
+                `;
+                if(notice) {
+                    notice.className = "p-4 rounded-xl bg-slate-900 border border-slate-800 text-slate-300 text-xs flex items-center justify-between flex-wrap gap-2";
+                    notice.innerHTML = `<span>🛍️ Berbelanja sebagai <strong>Pembeli Umum</strong>. Ingin harga grosir khusus anggota? Silakan login.</span><button onclick="openLoginModal()" class="px-3 py-1.5 rounded-lg bg-emerald-500 text-slate-950 font-bold hover:bg-emerald-400 transition">Login Anggota</button>`;
+                }
+            }
+            renderProducts('semua');
+        }
+
+        function openLoginModal() { document.getElementById('modal-login').classList.remove('hidden'); document.getElementById('modal-login').classList.add('flex'); }
+        function closeLoginModal() { document.getElementById('modal-login').classList.add('hidden'); document.getElementById('modal-login').classList.remove('flex'); }
+
+        document.getElementById('form-login').addEventListener('submit', (e) => {
+            e.preventDefault();
+            const idInput = document.getElementById('login-id').value.trim().toUpperCase();
+            const namaInput = document.getElementById('login-nama').value.trim();
+            
+            const matched = validMembers.find(m => m.id === idInput && m.nama.toLowerCase() === namaInput.toLowerCase());
+            if (matched) {
+                currentUser = matched;
+                localStorage.setItem('ksu_logged_user', JSON.stringify(currentUser));
+                closeLoginModal();
+                renderUserStatus();
+                alert(`Berhasil Login sebagai Anggota: ${matched.nama} (${matched.id})`);
+            } else {
+                alert('ID atau Nama Anggota tidak valid! Silakan cek kembali.');
+            }
+        });
+
+        function logout() {
+            currentUser = null;
+            localStorage.removeItem('ksu_logged_user');
+            renderUserStatus();
+            alert('Anda telah keluar dari akun anggota.');
+        }
+
+        function renderProducts(category) {
+            const grid = document.getElementById('product-grid');
+            grid.innerHTML = '';
+            const filtered = category === 'semua' ? products : products.filter(p => p.kategori === category);
+
+            filtered.forEach(p => {
+                const priceToShow = currentUser ? p.hargaAnggota : p.hargaUmum;
+                const card = document.createElement('div');
+                card.className = "bg-slate-900 border border-slate-800 rounded-2xl p-5 flex flex-col justify-between space-y-4 hover:border-emerald-500/50 transition";
+                card.innerHTML = `
+                    <div class="space-y-2">
+                        <div class="flex items-center justify-between">
+                            <span class="px-2.5 py-1 rounded-lg bg-slate-950 text-emerald-400 text-[10px] font-bold uppercase">${p.kategori}</span>
+                            <span class="text-[11px] text-slate-400">Berat: ${p.berat || 1} Kg | Stok: ${p.stok}</span>
+                        </div>
+                        <h3 class="font-bold text-white text-base">${p.nama}</h3>
+                        <p class="text-xs text-slate-400 line-clamp-2">${p.deskripsi}</p>
+                    </div>
+                    <div class="pt-2 border-t border-slate-800/80 flex items-center justify-between">
+                        <div>
+                            <span class="block text-lg font-extrabold text-emerald-400">Rp ${priceToShow.toLocaleString('id-ID')}</span>
+                            <span class="block text-[10px] text-slate-400">${currentUser ? 'Harga Spesial Anggota' : 'Harga Umum'}</span>
+                        </div>
+                        <button onclick="addToCart(${p.id})" class="px-4 py-2.5 rounded-xl bg-emerald-500 hover:bg-emerald-400 text-slate-950 text-xs font-bold transition shadow-md shadow-emerald-950">
+                            + Beli / Keranjang
+                        </button>
+                    </div>
+                `;
+                grid.appendChild(card);
+            });
+        }
+
+        function filterCategory(cat) {
+            document.querySelectorAll('.cat-btn').forEach(btn => {
+                btn.className = "cat-btn px-4 py-2 rounded-xl bg-slate-900 border border-slate-800 text-slate-300 hover:text-white whitespace-nowrap";
+            });
+            event.target.className = "cat-btn px-4 py-2 rounded-xl bg-emerald-500 text-slate-950 whitespace-nowrap";
+            renderProducts(cat);
+        }
+
+        function addToCart(productId) {
+            const product = products.find(p => p.id === productId);
+            const existing = cart.find(item => item.id === productId);
+            if (existing) {
+                existing.qty += 1;
+            } else {
+                cart.push({ ...product, qty: 1 });
+            }
+            updateCartBadge();
+            alert(`${product.nama} berhasil dimasukkan ke keranjang.`);
+        }
+
+        function updateCartBadge() {
+            const badge = document.getElementById('cart-badge');
+            const totalQty = cart.reduce((sum, item) => sum + item.qty, 0);
+            badge.innerText = totalQty;
+        }
+
+        document.getElementById('btn-open-cart').addEventListener('click', () => {
+            renderCartModal();
+            document.getElementById('modal-cart').classList.remove('hidden');
+            document.getElementById('modal-cart').classList.add('flex');
+            initInteractiveMap();
+        });
+
+        function closeCartModal() {
+            document.getElementById('modal-cart').classList.add('hidden');
+            document.getElementById('modal-cart').classList.remove('flex');
+        }
+
+        function changeQty(index, delta) {
+            cart[index].qty += delta;
+            if (cart[index].qty <= 0) {
+                cart.splice(index, 1);
+            }
+            updateCartBadge();
+            renderCartModal();
+        }
+
+        function toggleDeliveryOptions() {
+            const method = document.getElementById('checkout-method').value;
+            const mapsSection = document.getElementById('delivery-maps-section');
+            if (method.includes('Diambil Sendiri')) {
+                mapsSection.classList.add('hidden');
+            } else {
+                mapsSection.classList.remove('hidden');
+                initInteractiveMap();
+            }
+            calculateDelivery();
+        }
+
+        function calculateDistance(lat1, lon1, lat2, lon2) {
+            const R = 6371;
+            const dLat = (lat2 - lat1) * Math.PI / 180;
+            const dLon = (lon2 - lon1) * Math.PI / 180;
+            const a = Math.sin(dLat/2) * Math.sin(dLat/2) +
+                      Math.cos(lat1 * Math.PI / 180) * Math.cos(lat2 * Math.PI / 180) *
+                      Math.sin(dLon/2) * Math.sin(dLon/2);
+            const c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1-a));
+            return R * c;
+        }
+
+        function calculateDelivery() {
+            let subtotal = 0;
+            let totalWeight = 0;
+
+            cart.forEach(item => {
+                const activePrice = currentUser ? item.hargaAnggota : item.hargaUmum;
+                subtotal += activePrice * item.qty;
+                totalWeight += (item.berat || 1) * item.qty;
+            });
+
+            document.getElementById('cart-subtotal').innerText = `Rp ${subtotal.toLocaleString('id-ID')}`;
+            document.getElementById('cart-total-weight').innerText = `${totalWeight.toFixed(1)} Kg`;
+
+            const method = document.getElementById('checkout-method').value;
+            let deliveryCost = 0;
+            let distance = 0;
+
+            if (method.includes('Diantar')) {
+                const destLat = parseFloat(document.getElementById('dest-lat').value) || coopLocation.lat;
+                const destLng = parseFloat(document.getElementById('dest-lng').value) || coopLocation.lng;
+
+                distance = calculateDistance(coopLocation.lat, coopLocation.lng, destLat, destLng);
+                document.getElementById('distance-text').innerText = `${distance.toFixed(2)} km`;
+
+                const ratePerKm = currentUser ? 2000 : 4000;
+                const ratePerKg = currentUser ? 1000 : 2000;
+                
+                deliveryCost = (distance * ratePerKm) + (totalWeight * ratePerKg);
+                if (deliveryCost < 5000 && distance > 0) deliveryCost = currentUser ? 5000 : 10000;
+            } else {
+                document.getElementById('distance-text').innerText = `0 km (Ambil Sendiri)`;
+            }
+
+            document.getElementById('delivery-cost-display').innerText = `Rp ${deliveryCost.toLocaleString('id-ID')}`;
+            const grandTotal = subtotal + deliveryCost;
+            document.getElementById('cart-total').innerText = `Rp ${grandTotal.toLocaleString('id-ID')}`;
+
+            return { subtotal, totalWeight, deliveryCost, distance, grandTotal };
+        }
+
+        function detectUserLocation() {
+            if (navigator.geolocation) {
+                navigator.geolocation.getCurrentPosition(position => {
+                    const lat = position.coords.latitude;
+                    const lng = position.coords.longitude;
+                    
+                    if (leafletMap && userMarker) {
+                        leafletMap.setView([lat, lng], 15);
+                        userMarker.setLatLng([lat, lng]);
+                        updateLocationFields(lat, lng);
+                    }
+                    alert('Lokasi GPS Anda berhasil ditemukan pada peta!');
+                }, error => {
+                    alert('Gagal mendeteksi lokasi otomatis. Pastikan izin GPS aktif.');
+                });
+            } else {
+                alert('Browser Anda tidak mendukung geolokasi.');
+            }
+        }
+
+        function renderCartModal() {
+            const container = document.getElementById('cart-items-container');
+            const modeBadge = document.getElementById('cart-mode-badge');
+            container.innerHTML = '';
+
+            if (currentUser) {
+                modeBadge.innerText = `(Harga Anggota: ${currentUser.nama})`;
+                modeBadge.className = "text-xs text-emerald-400 font-bold";
+            } else {
+                modeBadge.innerText = "(Harga Umum)";
+                modeBadge.className = "text-xs text-amber-400 font-normal";
+            }
+
+            if (cart.length === 0) {
+                container.innerHTML = `<p class="text-xs text-slate-400 text-center py-4">Keranjang belanja kosong.</p>`;
+                calculateDelivery();
+                return;
+            }
+
+            cart.forEach((item, index) => {
+                const activePrice = currentUser ? item.hargaAnggota : item.hargaUmum;
+                const subtotal = activePrice * item.qty;
+
+                const row = document.createElement('div');
+                row.className = "py-3 flex items-center justify-between gap-2 text-xs";
+                row.innerHTML = `
+                    <div>
+                        <span class="font-bold text-white block">${item.nama}</span>
+                        <span class="text-slate-400">Rp ${activePrice.toLocaleString('id-ID')} x ${item.qty}</span>
+                    </div>
+                    <div class="flex items-center gap-2">
+                        <div class="flex items-center bg-slate-950 border border-slate-800 rounded-lg overflow-hidden">
+                            <button type="button" onclick="changeQty(${index}, -1)" class="px-2 py-1 text-slate-300 hover:bg-slate-800">-</button>
+                            <span class="px-2 font-bold text-white">${item.qty}</span>
+                            <button type="button" onclick="changeQty(${index}, 1)" class="px-2 py-1 text-slate-300 hover:bg-slate-800">+</button>
+                        </div>
+                        <span class="font-bold text-emerald-400 min-w-[70px] text-right">Rp ${subtotal.toLocaleString('id-ID')}</span>
+                    </div>
+                `;
+                container.appendChild(row);
+            });
+
+            calculateDelivery();
+        }
+
+        document.getElementById('form-checkout').addEventListener('submit', (e) => {
+            e.preventDefault();
+            if (cart.length === 0) {
+                alert('Keranjang belanja kosong!');
+                return;
+            }
+
+            let pemesanNama = currentUser ? currentUser.nama + ` (Anggota ID: ${currentUser.id})` : document.getElementById('guest-nama').value.trim();
+            let pemesanHp = currentUser ? 'Terverifikasi Anggota Koperasi' : document.getElementById('guest-hp').value.trim();
+            const metode = document.getElementById('checkout-method').value;
+            const catatan = document.getElementById('checkout-note').value.trim();
+
+            if (!currentUser && !pemesanNama) {
+                alert('Silakan masukkan nama pemesan.');
+                return;
+            }
+
+            const calc = calculateDelivery();
+            const invoiceId = 'GUS-' + Math.floor(100000 + Math.random() * 900000);
+            let itemListText = '';
+            let totalModal = 0;
+
+            cart.forEach(item => {
+                const activePrice = currentUser ? item.hargaAnggota : item.hargaUmum;
+                totalModal += item.modal * item.qty;
+                itemListText += `- ${item.nama} (${item.qty}x) @Rp ${activePrice.toLocaleString('id-ID')}%0A`;
+            });
+
+            const marginBersih = calc.subtotal - totalModal;
+            const destLat = document.getElementById('dest-lat').value;
+            const destLng = document.getElementById('dest-lng').value;
+            const mapsLink = metode.includes('Diantar') ? `https://maps.google.com/?q=${destLat},${destLng}` : 'Ambil Sendiri di Koperasi';
+
+            const newTx = {
+                id: invoiceId,
+                nama: pemesanNama,
+                hp: pemesanHp,
+                items: [...cart],
+                omzet: calc.grandTotal,
+                modal: totalModal,
+                margin: marginBersih,
+                metode: metode,
+                berat: calc.totalWeight,
+                jarak: calc.distance,
+                ongkir: calc.deliveryCost,
+                maps: mapsLink,
+                catatan: catatan,
+                status: 'Menunggu Konfirmasi',
+                deliveryStatus: metode.includes('Diantar') ? 'Menunggu Kurir / Belum Tiba' : 'Diambil Sendiri'
+            };
+
+            transactions.unshift(newTx);
+            localStorage.setItem('ksu_transactions', JSON.stringify(transactions));
+
+            const waText = `Halo Admin KSU Gumi Utara Sejati,%0A%0ASaya ingin memesan sembako via *GUS MART*:%0A%0A*No Invoice:* ${invoiceId}%0A*Pemesan:* ${pemesanNama}%0A*Kontak:* ${pemesanHp}%0A*Metode:* ${metode}%0A*Jarak Kurir:* ${calc.distance.toFixed(2)} km%0A*Estimasi Berat:* ${calc.totalWeight.toFixed(1)} Kg%0A*Ongkir:* Rp ${calc.deliveryCost.toLocaleString('id-ID')}%0A*Titik Maps Tujuan:* ${mapsLink}%0A*Alamat Lengkap:* ${catatan || '-'}%0A%0A*Daftar Belanja:*%0A${itemListText}%0A*Total Bayar (+Ongkir):* Rp ${calc.grandTotal.toLocaleString('id-ID')}%0A%0AMohon segera diproses ya. Terima kasih!`;
+
+            cart = [];
+            updateCartBadge();
+            closeCartModal();
+            renderDashboard();
+
+            window.open(`https://wa.me/6281944502860?text=${waText}`, '_blank');
+            alert('Pesanan berhasil dibuat dan diarahkan ke WhatsApp Admin!');
+        });
+
+        function renderDashboard() {
+            let totalOmzet = 0;
+            let totalModal = 0;
+            let totalMargin = 0;
+
+            transactions.forEach(tx => {
+                if(tx.status === 'Sukses' || tx.status === 'Menunggu Konfirmasi') {
+                    totalOmzet += tx.omzet;
+                    totalModal += tx.modal;
+                    totalMargin += tx.margin;
+                }
+            });
+
+            document.getElementById('stat-omzet').innerText = `Rp ${totalOmzet.toLocaleString('id-ID')}`;
+            document.getElementById('stat-modal').innerText = `Rp ${totalModal.toLocaleString('id-ID')}`;
+            document.getElementById('stat-margin').innerText = `Rp ${totalMargin.toLocaleString('id-ID')}`;
+            document.getElementById('stat-count').innerText = `${transactions.length} Transaksi`;
+
+            const tbody = document.getElementById('transaction-table-body');
+            tbody.innerHTML = '';
+
+            if (transactions.length === 0) {
+                tbody.innerHTML = `<tr><td colspan="7" class="p-4 text-center text-slate-500">Belum ada histori transaksi tercatat.</td></tr>`;
+                return;
+            }
+
+            transactions.forEach((tx, idx) => {
+                const tr = document.createElement('tr');
+                tr.className = "hover:bg-slate-950/50 transition";
+                let itemsSummary = tx.items.map(i => `${i.nama} (${i.qty}x)`).join(', ');
+
+                tr.innerHTML = `
+                    <td class="p-3 font-mono text-emerald-400 font-bold">${tx.id}</td>
+                    <td class="p-3">
+                        <span class="block font-bold text-white">${tx.nama}</span>
+                        <span class="text-[10px] text-slate-400">${tx.hp}</span>
+                    </td>
+                    <td class="p-3 text-slate-300 max-w-xs truncate">${itemsSummary}</td>
+                    <td class="p-3 font-bold text-emerald-400">Rp ${tx.omzet.toLocaleString('id-ID')} <br><span class="text-[9px] text-teal-400 font-normal">(Ongkir: Rp ${(tx.ongkir||0).toLocaleString('id-ID')})</span></td>
+                    <td class="p-3 text-slate-300">
+                        ${tx.metode}<br>
+                        ${tx.maps.includes('http') ? `<a href="${tx.maps}" target="_blank" class="text-amber-400 underline text-[10px]">📍 Buka Maps (${(tx.jarak||0).toFixed(1)} km)</a>` : ''}
+                    </td>
+                    <td class="p-3">
+                        <span class="px-2 py-1 rounded-full text-[10px] font-bold ${tx.deliveryStatus === 'Barang Sudah Tiba / Diterima' ? 'bg-emerald-950 text-emerald-400 border border-emerald-800' : 'bg-amber-950 text-amber-400 border border-amber-800'}">
+                            ${tx.deliveryStatus || 'Diproses'}
+                        </span>
+                    </td>
+                    <td class="p-3 text-center space-y-1">
+                        <button onclick="confirmArrived(${idx})" class="w-full px-2 py-1 rounded bg-emerald-600 hover:bg-emerald-500 text-slate-950 text-[10px] font-bold transition">✅ Konfirmasi Barang Tiba</button>
+                        <div class="flex justify-center gap-1">
+                            <button onclick="toggleTxStatus(${idx})" class="px-2 py-1 rounded bg-slate-800 hover:bg-slate-700 text-slate-200 text-[9px]">Ubah Status</button>
+                            <button onclick="deleteTx(${idx})" class="px-2 py-1 rounded bg-red-950 hover:bg-red-900 text-red-400 text-[9px]">Hapus</button>
+                        </div>
+                    </td>
+                `;
+                tbody.appendChild(tr);
+            });
+        }
+
+        function confirmArrived(idx) {
+            transactions[idx].deliveryStatus = 'Barang Sudah Tiba / Diterima';
+            transactions[idx].status = 'Sukses';
+            localStorage.setItem('ksu_transactions', JSON.stringify(transactions));
+            renderDashboard();
+
+            const tx = transactions[idx];
+            const confirmWa = `Halo Admin KSU Gumi Utara Sejati,%0A%0AKonfirmasi dari pemesan bahwa pesanan dengan *No Invoice:* ${tx.id} atas nama *${tx.nama}* telah *SUDAH TIBA / DITERIMA DENGAN BAIK*.%0A%0ATerima kasih!`;
+            window.open(`https://wa.me/6281944502860?text=${confirmWa}`, '_blank');
+        }
+
+        function toggleTxStatus(idx) {
+            transactions[idx].status = transactions[idx].status === 'Sukses' ? 'Menunggu Konfirmasi' : 'Sukses';
+            localStorage.setItem('ksu_transactions', JSON.stringify(transactions));
+            renderDashboard();
+        }
+
+        function deleteTx(idx) {
+            if (confirm('Hapus histori transaksi ini?')) {
+                transactions.splice(idx, 1);
+                localStorage.setItem('ksu_transactions', JSON.stringify(transactions));
+                renderDashboard();
+            }
+        }
+
+        document.getElementById('btn-usul-produk').addEventListener('click', () => {
+            document.getElementById('modal-usul').classList.remove('hidden');
+            document.getElementById('modal-usul').classList.add('flex');
+        });
+
+        function closeUsulModal() {
+            document.getElementById('modal-usul').classList.add('hidden');
+            document.getElementById('modal-usul').classList.remove('flex');
+        }
+
+        document.getElementById('form-usul').addEventListener('submit', (e) => {
+            e.preventDefault();
+            const nama = document.getElementById('usul-nama').value;
+            const harga = document.getElementById('usul-harga').value;
+            const ket = document.getElementById('usul-ket').value;
+
+            const text = `Halo Pengurus KSU Gumi Utara Sejati,%0A%0ASaya ingin mengusulkan produk sembako baru untuk GUS MART:%0A*Nama Barang:* ${nama}%0A*Estimasi Harga:* Rp ${Number(harga).toLocaleString('id-ID')}%0A*Alasan/Keterangan:* ${ket}`;
+            window.open(`https://wa.me/6281944502860?text=${text}`, '_blank');
+            closeUsulModal();
+            alert('Usulan produk berhasil dikirim via WhatsApp Admin!');
+        });
+
+        function setupEventListeners() {
+            const ketikAlamat = document.getElementById('checkout-note');
+            if (ketikAlamat) {
+                ketikAlamat.addEventListener('blur', geocodeAddressToMap);
+            }
+
+            const btn = document.getElementById('mobile-menu-btn');
+            const menu = document.getElementById('mobile-menu');
+            btn.addEventListener('click', () => {
+                menu.classList.toggle('hidden');
+            });
+            document.querySelectorAll('.mobile-link').forEach(l => {
+                l.addEventListener('click', () => menu.classList.add('hidden'));
+            });
+        }
+    </script>
+</body>
+</html>
